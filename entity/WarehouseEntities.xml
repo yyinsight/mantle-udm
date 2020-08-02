@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
+
+    <entity entity-name="Warehouse" package="com.hy.wms">
+        <field name="id" type="id" is-pk="true"/>
+        <field name="statusId" type="id"><description>状态</description></field>
+        <field name="ownerPartyId" type="id"><description>所有者Id</description></field>
+        <field name="code" type="text-medium"><description>库房编码</description></field>
+        <field name="name" type="text-medium"><description>库房名称</description></field>
+        <field name="typeIds" type="text-long"><description>库房类型id集合，以分号分隔</description></field>
+        <seed-data>
+            <!--Warehouse Type-->
+            <moqui.basic.EnumerationType description="Warehouse Type" enumTypeId="WarehouseType"><description>枚举类型：库房类型</description></moqui.basic.EnumerationType>
+            <moqui.basic.Enumeration description="Food" enumId="WTFood" enumTypeId="WarehouseType"/>
+            <moqui.basic.Enumeration description="Digital" enumId="WTDigital" enumTypeId="WarehouseType"/>
+            <!-- Warehouse Status -->
+            <moqui.basic.StatusType description="Warehouse Status" statusTypeId="Warehouse"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="Area" package="com.hy.wms">
+        <field name="id" type="id" is-pk="true"/>
+        <field name="warehouseId" type="id"/>
+        <field name="statusId" type="id"/>
+        <field name="ownerPartyId" type="id"/>
+        <field name="code" type="text-medium"/>
+        <field name="name" type="text-medium"/>
+        <relationship type="many" related="com.hy.wms.Warehouse">
+
+        </relationship>
+        <seed-data>
+            <!--Warehouse Type-->
+            <moqui.basic.EnumerationType description="Area Type" enumTypeId="AreaType"/>
+            <moqui.basic.Enumeration description="Food" enumId="WTFood" enumTypeId="AreaType"/>
+            <moqui.basic.Enumeration description="Digital" enumId="WTDigital" enumTypeId="AreaType"/>
+
+            <!-- Warehouse Status -->
+            <moqui.basic.StatusType description="Area Status" statusTypeId="Area"/>
+        </seed-data>
+    </entity>
+    
+    <entity entity-name="Shelf" package="com.hy.wms">
+        <field name="id" type="id" is-pk="true"/>
+        <field name="warehouseId" type="id"/>
+        <field name="areaId" type="id"/>
+        <field name="statusId" type="id"/>
+        <field name="ownerPartyId" type="id"/>
+        <field name="code" type="text-medium"/>
+        <field name="name" type="text-medium"/>
+        <seed-data>
+            <!--Warehouse Type-->
+            <moqui.basic.EnumerationType description="Shelf Type" enumTypeId="ShelfType"/>
+            <moqui.basic.Enumeration description="Food" enumId="WTFood" enumTypeId="ShelfType"/>
+            <moqui.basic.Enumeration description="Digital" enumId="WTDigital" enumTypeId="ShelfType"/>
+
+            <!-- Warehouse Status -->
+            <moqui.basic.StatusType description="Shelf Status" statusTypeId="Shelf"/>
+        </seed-data>
+    </entity>
+    
+    <entity entity-name="Bin" package="com.hy.wms">
+        <field name="id" type="id" is-pk="true"/>
+        <field name="statusId" type="id"/>
+        <field name="ownerPartyId" type="id"/>
+
+    </entity>
+
+
+</entities>

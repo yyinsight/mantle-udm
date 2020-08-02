@@ -104,7 +104,9 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.StatusType description="Facility" statusTypeId="Facility"/>
         </seed-data>
         <master>
-            <detail relationship="type"/><detail relationship="parent"/><detail relationship="status"/>
+            <detail relationship="type"/>
+            <detail relationship="parent"/>
+            <detail relationship="status"/>
             <detail relationship="owner" use-master="basic"/>
             <detail relationship="sizeUom"/><detail relationship="geo"/><detail relationship="geoPoint"/>
 
