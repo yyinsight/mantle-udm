@@ -855,7 +855,6 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="otherRoleTypeId"/></relationship>
         <relationship type="one" title="Currency" related="moqui.basic.Uom" short-alias="currencyUom">
             <key-map field-name="currencyUomId"/></relationship>
-
         <relationship type="many" related="mantle.party.agreement.AgreementTerm" short-alias="terms">
             <key-map field-name="agreementId"/></relationship>
         <relationship type="many" related="mantle.party.agreement.AgreementItem" short-alias="items">

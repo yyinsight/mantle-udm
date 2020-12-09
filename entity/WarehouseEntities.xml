@@ -15,12 +15,16 @@ along with this software (see the LICENSE.md file). If not, see
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
 
-    <entity entity-name="Warehouse" package="com.hy.wms">
+    <entity entity-name="Warehouse" package="mantle.wms">
         <field name="id" type="id" is-pk="true"/>
         <field name="statusId" type="id"><description>状态</description></field>
-        <field name="ownerPartyId" type="id"><description>所有者Id</description></field>
-        <field name="code" type="text-medium"><description>库房编码</description></field>
-        <field name="name" type="text-medium"><description>库房名称</description></field>
+        <field name="creatorPartyId" type="id"><description>创建者Id</description></field>
+        <field name="creatorName" type="text-medium"><description>创建者名称</description></field>
+        <field name="createdStamp" type="date-time"><description>创建时间</description></field>
+        <field name="sysOrgCode" type="text-medium"><description>组织代码</description></field>
+        <field name="sysCompanyCode" type="text-medium"><description>公司代码</description></field>
+        <field name="warehouseCode" type="text-medium"><description>库房编码</description></field>
+        <field name="warehouseName" type="text-medium"><description>库房名称</description></field>
         <field name="typeIds" type="text-long"><description>库房类型id集合，以分号分隔</description></field>
         <seed-data>
             <!--Warehouse Type-->
@@ -32,28 +36,27 @@ along with this software (see the LICENSE.md file). If not, see
         </seed-data>
     </entity>
 
-    <entity entity-name="Area" package="com.hy.wms">
+    <entity entity-name="Area" package="mantle.wms">
+        <description>货区</description>
         <field name="id" type="id" is-pk="true"/>
         <field name="warehouseId" type="id"/>
         <field name="statusId" type="id"/>
         <field name="ownerPartyId" type="id"/>
         <field name="code" type="text-medium"/>
         <field name="name" type="text-medium"/>
-        <relationship type="many" related="com.hy.wms.Warehouse">
-
-        </relationship>
         <seed-data>
-            <!--Warehouse Type-->
+            <!--Area Type-->
             <moqui.basic.EnumerationType description="Area Type" enumTypeId="AreaType"/>
             <moqui.basic.Enumeration description="Food" enumId="WTFood" enumTypeId="AreaType"/>
             <moqui.basic.Enumeration description="Digital" enumId="WTDigital" enumTypeId="AreaType"/>
 
-            <!-- Warehouse Status -->
+            <!-- Area Status -->
             <moqui.basic.StatusType description="Area Status" statusTypeId="Area"/>
         </seed-data>
     </entity>
     
-    <entity entity-name="Shelf" package="com.hy.wms">
+    <entity entity-name="Shelf" package="mantle.wms">
+        <description>货架</description>
         <field name="id" type="id" is-pk="true"/>
         <field name="warehouseId" type="id"/>
         <field name="areaId" type="id"/>
@@ -62,17 +65,18 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="code" type="text-medium"/>
         <field name="name" type="text-medium"/>
         <seed-data>
-            <!--Warehouse Type-->
+            <!--Shelf Type-->
             <moqui.basic.EnumerationType description="Shelf Type" enumTypeId="ShelfType"/>
             <moqui.basic.Enumeration description="Food" enumId="WTFood" enumTypeId="ShelfType"/>
             <moqui.basic.Enumeration description="Digital" enumId="WTDigital" enumTypeId="ShelfType"/>
 
-            <!-- Warehouse Status -->
+            <!-- Shelf Status -->
             <moqui.basic.StatusType description="Shelf Status" statusTypeId="Shelf"/>
         </seed-data>
     </entity>
     
-    <entity entity-name="Bin" package="com.hy.wms">
+    <entity entity-name="Bin" package="mantle.wms">
+        <description>货位</description>
         <field name="id" type="id" is-pk="true"/>
         <field name="statusId" type="id"/>
         <field name="ownerPartyId" type="id"/>
