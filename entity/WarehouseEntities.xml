@@ -15,7 +15,7 @@ along with this software (see the LICENSE.md file). If not, see
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
 
-    <entity entity-name="Warehouse" package="mantle.wms">
+    <entity entity-name="Warehouse" package="mantle.wms" authorize-skip="true">
         <field name="id" type="id" is-pk="true"/>
         <field name="statusId" type="id"><description>状态</description></field>
         <field name="creatorPartyId" type="id"><description>创建者Id</description></field>
