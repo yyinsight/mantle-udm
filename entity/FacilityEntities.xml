@@ -47,7 +47,7 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="facilityTypeEnumId"/></relationship>
         <relationship type="one" title="Parent" related="mantle.facility.Facility" short-alias="parent">
             <key-map field-name="parentFacilityId" related="facilityId"/></relationship>
-        <relationship type="one" title="Facility" related="moqui.basic.StatusItem" short-alias="status"/>
+        <relationship type="one" title="Status" related="moqui.basic.StatusItem" short-alias="status"/>
         <relationship type="one" title="Owner" related="mantle.party.Party" short-alias="owner">
             <key-map field-name="ownerPartyId"/></relationship>
         <relationship type="one-nofk" title="Owner" related="mantle.party.Organization" short-alias="ownerOrganization">
@@ -103,6 +103,9 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.Enumeration description="Warehouse" enumId="FcTpWarehouse" enumTypeId="FacilityType"/>
             <moqui.basic.Enumeration description="Dock" enumId="FcTpDock" enumTypeId="FacilityType"/>
             <moqui.basic.Enumeration description="Production Line" enumId="FcTpLine" enumTypeId="FacilityType"/>
+            <moqui.basic.Enumeration description="Area" enumId="FcTpArea" enumTypeId="FacilityType"/>
+            <moqui.basic.Enumeration description="Shelf" enumId="FcTpShelf" enumTypeId="FacilityType"/>
+            <moqui.basic.Enumeration description="Bin" enumId="FcTpBin" enumTypeId="FacilityType"/>
 
             <!-- Facility Status -->
             <moqui.basic.StatusType description="Facility" statusTypeId="Facility"/>
