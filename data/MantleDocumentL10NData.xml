@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+
+<entity-facade-xml type="seed">
+
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleCommunicationEvent" locale="zh_CN" localized="沟通事件"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleEvent" locale="zh_CN" localized="事件"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleFacility" locale="zh_CN" localized="场所设施"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleInventoryAsset" locale="zh_CN" localized="库存资产"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleInventoryOrderItem" locale="zh_CN" localized="订单项"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleInventoryProdEstimate" locale="zh_CN" localized="产品估算"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleInventoryRunConsume" locale="zh_CN" localized="运行消耗"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleInventoryRunProduce" locale="zh_CN" localized="运行产出"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleParty" locale="zh_CN" localized="团体"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.entity.document.DataDocument" fieldName="documentName" pkValue="MantleProduct" locale="zh_CN" localized="产品"/>
+
+</entity-facade-xml>
