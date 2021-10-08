@@ -213,6 +213,7 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.EnumerationType description="Product Association Type" enumTypeId="ProductAssocType"/>
 
             <moqui.basic.Enumeration description="Up-Sell (Upgrade)" enumId="PatUpsell" enumTypeId="ProductAssocType"/>
+            <moqui.basic.Enumeration description="Down-Sell (Downgrade)" enumId="PatDownSell" enumTypeId="ProductAssocType"/>
             <moqui.basic.Enumeration description="New Version, Replacement" enumId="PatReplacement" enumTypeId="ProductAssocType"/>
             <moqui.basic.Enumeration description="Equivalent or Substitute" enumId="PatEquivalent" enumTypeId="ProductAssocType"/>
             <moqui.basic.Enumeration description="Accessory" enumId="PatAccessory" enumTypeId="ProductAssocType"/>
@@ -1128,12 +1129,15 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="thruDate" type="date-time"/>
         <field name="applTypeEnumId" type="id"/>
         <field name="sequenceNum" type="number-integer"/>
-        <field name="amount" type="currency-amount"/>
-        <field name="recurringAmount" type="currency-amount"/>
+        <field name="amount" type="number-decimal"/>
+        <field name="recurringAmount" type="number-decimal"/>
+        <field name="featureProductId" type="id"><description>For Optional features represented by a Product (lightweight product configuration)</description></field>
         <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" related="mantle.product.feature.ProductFeature" short-alias="feature"/>
         <relationship type="one" title="ProductFeatureApplType" related="moqui.basic.Enumeration">
             <key-map field-name="applTypeEnumId"/></relationship>
+        <relationship type="one" title="Feature" related="mantle.product.Product" short-alias="featureProduct">
+            <key-map field-name="featureProductId"/></relationship>
         <index name="PRODFTAP_PID_PFID" unique="false"><index-field name="productId"/><index-field name="productFeatureId"/></index>
         <seed-data>
             <!-- Product Feature Appl Type -->
@@ -1156,6 +1160,12 @@ along with this software (see the LICENSE.md file). If not, see
                     Used only for variant products. Features applied to products this way distinguish one variant from another.
                     For the virtual/variant structure the features attached to variants can be applied as Standard or Distinguishing features.
                     Use distinguishing instead of standard feature application when you want the feature to be used ONLY for virtual/variant distinction and not for other things standard features are used for like product comparisons and such.
+                -->
+            </moqui.basic.Enumeration>
+            <moqui.basic.Enumeration description="Optional" enumId="PfatOptional" enumTypeId="ProductFeatureApplType">
+                <!--
+                    Optional features are for add-on options to a Product that may optionally have an amount and/or recurringAmount to charge for the option,
+                    and may optionally have a featureProductId with more details about the option (including ProductPrice records to override or instead of amount and recurringAmount).
                 -->
             </moqui.basic.Enumeration>
         </seed-data>
