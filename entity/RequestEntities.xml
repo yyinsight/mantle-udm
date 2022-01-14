@@ -53,8 +53,6 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="requestResolutionEnumId"/></relationship>
         <relationship type="one" title="Root" related="mantle.work.effort.WorkEffort" short-alias="rootWorkEffort">
             <key-map field-name="rootWorkEffortId" related="workEffortId"/></relationship>
-        <relationship type="one" related="mantle.facility.Facility" short-alias="facility"/>
-        <relationship type="one" related="mantle.product.store.ProductStore" short-alias="store"/>
         <relationship type="one" title="SalesChannel" related="moqui.basic.Enumeration" short-alias="salesChannel">
             <key-map field-name="salesChannelEnumId"/></relationship>
         <relationship type="one" title="Email" related="mantle.party.contact.ContactMech" short-alias="emailContactMech">
@@ -185,7 +183,6 @@ along with this software (see the LICENSE.md file). If not, see
 
         <relationship type="one" related="mantle.request.Request" short-alias="request"/>
         <relationship type="one" title="Request" related="moqui.basic.StatusItem" short-alias="status"/>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" title="Supplier" related="mantle.party.Party" short-alias="supplier">
             <key-map field-name="supplierPartyId"/></relationship>
     </entity>
@@ -211,10 +208,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.request.RequestItem" short-alias="requestItem">
             <key-map field-name="requestId"/>
             <key-map field-name="requestItemSeqId"/>
-        </relationship>
-        <relationship type="one" related="mantle.order.OrderItem" short-alias="orderItem">
-            <key-map field-name="orderId"/>
-            <key-map field-name="orderItemSeqId"/>
         </relationship>
     </entity>
     <entity entity-name="RequestNote" package="mantle.request" cache="never">
@@ -243,12 +236,12 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one-nofk" related="mantle.party.Organization" short-alias="organization"/>
         <seed-data>
             <moqui.basic.Enumeration description="Request" enumId="RgpRequest" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Assignee"/>
+            <!--<mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Assignee"/>-->
             <mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Manager"/>
-            <mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Reporter"/>
-            <mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Watcher"/>
-            <mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Customer"/>
-            <mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="CustomerBillTo"/>
+            <!--<mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Reporter"/>-->
+            <!--<mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Watcher"/>-->
+            <!--<mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="Customer"/>-->
+            <!--<mantle.party.RoleGroupMember  roleGroupEnumId="RgpRequest" roleTypeId="CustomerBillTo"/>-->
         </seed-data>
     </entity>
     <entity entity-name="RequestWorkEffort" package="mantle.request" cache="never">
@@ -286,10 +279,7 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" title="RequirementType" related="moqui.basic.Enumeration" short-alias="type">
             <key-map field-name="requirementTypeEnumId"/></relationship>
         <relationship type="one" title="Requirement" related="moqui.basic.StatusItem" short-alias="status"/>
-        <relationship type="one" related="mantle.facility.Facility" short-alias="facility"/>
         <relationship type="one" related="mantle.work.effort.Deliverable" short-alias="deliverable"/>
-        <relationship type="one" related="mantle.product.asset.Asset" short-alias="asset"/>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
 
         <seed-data>
             <!-- Requirement Type -->
@@ -320,10 +310,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="budgetId" type="id" is-pk="true"/>
         <field name="budgetItemSeqId" type="id" is-pk="true"/>
         <field name="amount" type="currency-amount"/>
-        <relationship type="one" related="BudgetItem">
-            <key-map field-name="budgetId"/>
-            <key-map field-name="budgetItemSeqId"/>
-        </relationship>
         <relationship type="one" related="mantle.request.requirement.Requirement"/>
     </entity>
     <entity entity-name="RequirementRequestItem" package="mantle.request.requirement" cache="never">
@@ -351,10 +337,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="orderId" type="id" is-pk="true"/>
         <field name="orderItemSeqId" type="id" is-pk="true"/>
         <field name="quantity" type="number-decimal"/>
-        <relationship type="one" related="mantle.order.OrderItem" short-alias="orderItem">
-            <key-map field-name="orderId"/>
-            <key-map field-name="orderItemSeqId"/>
-        </relationship>
         <relationship type="one" related="mantle.request.requirement.Requirement" short-alias="requirement"/>
     </entity>
     <entity entity-name="WorkRequirementFulfillment" package="mantle.request.requirement" cache="never">
