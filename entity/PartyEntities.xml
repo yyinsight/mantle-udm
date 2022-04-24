@@ -54,8 +54,8 @@ along with this software (see the LICENSE.md file). If not, see
 
         <relationship type="one-nofk" related="mantle.party.Organization" short-alias="organization" mutable="true"/>
         <relationship type="one-nofk" related="mantle.party.Person" short-alias="person" mutable="true"/>
-        <relationship type="many" related="mantle.party.PartyBadge" short-alias="badges">
-            <key-map field-name="partyId"/></relationship>
+        <!--<relationship type="many" related="mantle.party.PartyBadge" short-alias="badges">-->
+            <!--<key-map field-name="partyId"/></relationship>-->
         <relationship type="many" related="mantle.party.PartyClassificationAppl" short-alias="classifications">
             <key-map field-name="partyId"/></relationship>
         <relationship type="many" related="mantle.party.PartyContent" short-alias="contents">
@@ -76,11 +76,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="many" related="mantle.party.contact.PartyContactMech" short-alias="contactMechs">
             <key-map field-name="partyId"/></relationship>
 
-        <relationship type="many" related="mantle.account.financial.FinancialAccount" short-alias="financialAccounts">
-            <key-map field-name="partyId" related="ownerPartyId"/></relationship>
-        <relationship type="many" related="mantle.account.method.PaymentMethod" short-alias="paymentMethods">
-            <key-map field-name="partyId" related="ownerPartyId"/></relationship>
-
         <relationship type="many" related="moqui.security.UserAccount" short-alias="userAccounts">
             <key-map field-name="partyId"/></relationship>
 
@@ -100,59 +95,59 @@ along with this software (see the LICENSE.md file). If not, see
             <Person partyId="_NA_" firstName="Not" lastName="Applicable"/>
         </seed-data>
 
-        <master name="default">
-            <detail relationship="type"/>
-            <detail relationship="organization"/>
-            <detail relationship="person"/>
-            <!-- TODO: do something with UserAccount, exclude certain fields like PW/etc? -->
-            <detail relationship="badges"/>
-            <detail relationship="classifications">
-                <detail relationship="classification"><detail relationship="type"/></detail>
-            </detail>
-            <detail relationship="contents"><detail relationship="type"/></detail>
-            <detail relationship="identifications"><detail relationship="type"/></detail>
-            <detail relationship="notes"/>
-            <detail relationship="roles"><detail relationship="role"/></detail>
-            <detail relationship="fromRelationships">
-                <detail relationship="fromRole"/>
-                <detail relationship="toParty">
-                    <detail relationship="organization"/>
-                    <detail relationship="person"/>
-                </detail>
-                <detail relationship="toRole"/>
-                <detail relationship="status"/>
-                <detail relationship="type"/>
-            </detail>
-            <detail relationship="toRelationships">
-                <detail relationship="fromParty">
-                    <detail relationship="organization"/>
-                    <detail relationship="person"/>
-                </detail>
-                <detail relationship="fromRole"/>
-                <detail relationship="toRole"/>
-                <detail relationship="status"/>
-                <detail relationship="type"/>
-            </detail>
-            <detail relationship="contactMechs">
-                <detail relationship="contactMech" use-master="default"/>
-                <detail relationship="purpose"/>
-            </detail>
-        </master>
-        <master name="contact">
-            <detail relationship="type"/>
-            <detail relationship="organization"/>
-            <detail relationship="person"/>
-            <detail relationship="identifications"><detail relationship="type"/></detail>
-            <detail relationship="contactMechs">
-                <detail relationship="contactMech" use-master="default"/>
-                <detail relationship="purpose"/>
-            </detail>
-        </master>
-        <master name="basic">
-            <detail relationship="organization"/>
-            <detail relationship="person"/>
-            <detail relationship="identifications"><detail relationship="type"/></detail>
-        </master>
+        <!--<master name="default">-->
+            <!--<detail relationship="type"/>-->
+            <!--<detail relationship="organization"/>-->
+            <!--<detail relationship="person"/>-->
+            <!--&lt;!&ndash; TODO: do something with UserAccount, exclude certain fields like PW/etc? &ndash;&gt;-->
+            <!--<detail relationship="badges"/>-->
+            <!--<detail relationship="classifications">-->
+                <!--<detail relationship="classification"><detail relationship="type"/></detail>-->
+            <!--</detail>-->
+            <!--<detail relationship="contents"><detail relationship="type"/></detail>-->
+            <!--<detail relationship="identifications"><detail relationship="type"/></detail>-->
+            <!--<detail relationship="notes"/>-->
+            <!--<detail relationship="roles"><detail relationship="role"/></detail>-->
+            <!--<detail relationship="fromRelationships">-->
+                <!--<detail relationship="fromRole"/>-->
+                <!--<detail relationship="toParty">-->
+                    <!--<detail relationship="organization"/>-->
+                    <!--<detail relationship="person"/>-->
+                <!--</detail>-->
+                <!--<detail relationship="toRole"/>-->
+                <!--<detail relationship="status"/>-->
+                <!--<detail relationship="type"/>-->
+            <!--</detail>-->
+            <!--<detail relationship="toRelationships">-->
+                <!--<detail relationship="fromParty">-->
+                    <!--<detail relationship="organization"/>-->
+                    <!--<detail relationship="person"/>-->
+                <!--</detail>-->
+                <!--<detail relationship="fromRole"/>-->
+                <!--<detail relationship="toRole"/>-->
+                <!--<detail relationship="status"/>-->
+                <!--<detail relationship="type"/>-->
+            <!--</detail>-->
+            <!--<detail relationship="contactMechs">-->
+                <!--<detail relationship="contactMech" use-master="default"/>-->
+                <!--<detail relationship="purpose"/>-->
+            <!--</detail>-->
+        <!--</master>-->
+        <!--<master name="contact">-->
+            <!--<detail relationship="type"/>-->
+            <!--<detail relationship="organization"/>-->
+            <!--<detail relationship="person"/>-->
+            <!--<detail relationship="identifications"><detail relationship="type"/></detail>-->
+            <!--<detail relationship="contactMechs">-->
+                <!--<detail relationship="contactMech" use-master="default"/>-->
+                <!--<detail relationship="purpose"/>-->
+            <!--</detail>-->
+        <!--</master>-->
+        <!--<master name="basic">-->
+            <!--<detail relationship="organization"/>-->
+            <!--<detail relationship="person"/>-->
+            <!--<detail relationship="identifications"><detail relationship="type"/></detail>-->
+        <!--</master>-->
     </entity>
     <entity entity-name="Organization" package="mantle.party">
         <field name="partyId" type="id" is-pk="true"/>
@@ -161,8 +156,8 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="annualRevenue" type="currency-amount"/>
         <field name="numEmployees" type="number-integer"/>
         <relationship type="one" related="mantle.party.Party"/>
-        <relationship type="many" title="Owner" related="mantle.facility.Facility" short-alias="ownerFacilities">
-            <key-map field-name="partyId" related="ownerPartyId"/></relationship>
+        <!--<relationship type="many" title="Owner" related="mantle.facility.Facility" short-alias="ownerFacilities">-->
+            <!--<key-map field-name="partyId" related="ownerPartyId"/></relationship>-->
         <index name="PTY_ORG_NAME_IDX"><index-field name="organizationName"/></index>
     </entity>
     <entity entity-name="Person" package="mantle.party">
@@ -193,28 +188,28 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="residenceStatusEnumId"/></relationship>
         <index name="FIRST_NAME_IDX"><index-field name="firstName"/></index>
         <index name="LAST_NAME_IDX"><index-field name="lastName"/></index>
-        <seed-data>
-            <moqui.basic.EnumerationType description="Marital Status" enumTypeId="MaritalStatus"/>
-            <moqui.basic.Enumeration description="Single" enumId="MarsSingle" enumTypeId="MaritalStatus"/>
-            <moqui.basic.Enumeration description="Married" enumId="MarsMarried" enumTypeId="MaritalStatus"/>
-            <moqui.basic.Enumeration description="Divorced" enumId="MarsDivorced" enumTypeId="MaritalStatus"/>
-            <moqui.basic.Enumeration description="Widowed/Widower" enumId="MarsWidow" enumTypeId="MaritalStatus"/>
+        <!--<seed-data>-->
+            <!--<moqui.basic.EnumerationType description="Marital Status" enumTypeId="MaritalStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Single" enumId="MarsSingle" enumTypeId="MaritalStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Married" enumId="MarsMarried" enumTypeId="MaritalStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Divorced" enumId="MarsDivorced" enumTypeId="MaritalStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Widowed/Widower" enumId="MarsWidow" enumTypeId="MaritalStatus"/>-->
 
-            <moqui.basic.EnumerationType description="Employment Status" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="Full-time Employed" enumId="EmpsFullTime" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="Part-time Employed" enumId="EmpsPartTime" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="Self Employed" enumId="EmpsSelf" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="House-Person" enumId="EmpsHouse" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="Retired" enumId="EmpsRetired" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="Student" enumId="EmpsStudent" enumTypeId="EmploymentStatus"/>
-            <moqui.basic.Enumeration description="Unemployed" enumId="EmpsUnemployed" enumTypeId="EmploymentStatus"/>
+            <!--<moqui.basic.EnumerationType description="Employment Status" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Full-time Employed" enumId="EmpsFullTime" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Part-time Employed" enumId="EmpsPartTime" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Self Employed" enumId="EmpsSelf" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="House-Person" enumId="EmpsHouse" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Retired" enumId="EmpsRetired" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Student" enumId="EmpsStudent" enumTypeId="EmploymentStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Unemployed" enumId="EmpsUnemployed" enumTypeId="EmploymentStatus"/>-->
 
-            <moqui.basic.EnumerationType description="Residence Status" enumTypeId="ResidenceStatus"/>
-            <moqui.basic.Enumeration description="Own Home" enumId="RessOwn" enumTypeId="ResidenceStatus"/>
-            <moqui.basic.Enumeration description="Private Tenant" enumId="RessPrivateTenant" enumTypeId="ResidenceStatus"/>
-            <moqui.basic.Enumeration description="Public Tenant" enumId="RessPublicTenant" enumTypeId="ResidenceStatus"/>
-            <moqui.basic.Enumeration description="With Parents" enumId="RessParents" enumTypeId="ResidenceStatus"/>
-        </seed-data>
+            <!--<moqui.basic.EnumerationType description="Residence Status" enumTypeId="ResidenceStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Own Home" enumId="RessOwn" enumTypeId="ResidenceStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Private Tenant" enumId="RessPrivateTenant" enumTypeId="ResidenceStatus"/>-->
+            <!--<moqui.basic.Enumeration description="Public Tenant" enumId="RessPublicTenant" enumTypeId="ResidenceStatus"/>-->
+            <!--<moqui.basic.Enumeration description="With Parents" enumId="RessParents" enumTypeId="ResidenceStatus"/>-->
+        <!--</seed-data>-->
     </entity>
 
     <extend-entity entity-name="UserAccount" package="moqui.security">
@@ -222,48 +217,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.party.Party"/>
     </extend-entity>
 
-    <entity entity-name="PartyBadge" package="mantle.party">
-        <field name="partyBadgeId" type="id" is-pk="true"/>
-        <field name="partyId" type="id"/>
-        <field name="organizationPartyId" type="id"/>
-        <field name="fromDate" type="date-time"/>
-        <field name="thruDate" type="date-time"/>
-        <field name="serialNumber" type="text-short"/>
-        <field name="storedValue" type="text-medium"><description>For RFID this is the unique tracking identifier
-            (the TID can be tracked in the serialNumber field)</description></field>
-        <relationship type="one" related="mantle.party.Party"/>
-        <relationship type="one" title="Organization" related="mantle.party.Party">
-            <key-map field-name="organizationPartyId"/></relationship>
-        <index name="PartyBadgeSerial" unique="true"><index-field name="serialNumber"/></index>
-        <index name="PartyBadgeStored" unique="true"><index-field name="storedValue"/></index>
-    </entity>
-    <entity entity-name="PartyBadgeScan" package="mantle.party">
-        <field name="partyBadgeId" type="id" is-pk="true"/>
-        <field name="scanDate" type="date-time" is-pk="true"/>
-        <field name="scanValue" type="text-short"/>
-        <field name="scanPurposeEnumId" type="id"/>
-        <field name="scanResultEnumId" type="id"/>
-        <field name="facilityId" type="id"/>
-        <field name="timeEntryId" type="id"/>
-        <relationship type="one" related="mantle.party.PartyBadge"/>
-        <relationship type="one" title="PartyBadgeScanPurpose" related="moqui.basic.Enumeration">
-            <key-map field-name="scanPurposeEnumId"/></relationship>
-        <relationship type="one" title="PartyBadgeScanResult" related="moqui.basic.Enumeration">
-            <key-map field-name="scanResultEnumId"/></relationship>
-        <relationship type="one" related="mantle.facility.Facility"/>
-        <relationship type="one" related="mantle.work.time.TimeEntry"/>
-        <seed-data>
-            <moqui.basic.EnumerationType description="Party Badge Scan Purpose" enumTypeId="PartyBadgeScanPurpose"/>
-            <moqui.basic.Enumeration description="Access" enumId="PbspAccess" enumTypeId="PartyBadgeScanPurpose"/>
-            <moqui.basic.Enumeration description="Clock In" enumId="PbspClockIn" enumTypeId="PartyBadgeScanPurpose"/>
-            <moqui.basic.Enumeration description="Clock Out" enumId="PbspClockOut" enumTypeId="PartyBadgeScanPurpose"/>
-
-            <moqui.basic.EnumerationType description="Party Badge Scan Result" enumTypeId="PartyBadgeScanResult"/>
-            <moqui.basic.Enumeration description="Success" enumId="PbsrSuccess" enumTypeId="PartyBadgeScanResult"/>
-            <moqui.basic.Enumeration description="Not Yet Valid" enumId="PbsrNotYetValid" enumTypeId="PartyBadgeScanResult"/>
-            <moqui.basic.Enumeration description="Expired" enumId="PbsrExpired" enumTypeId="PartyBadgeScanResult"/>
-        </seed-data>
-    </entity>
     <entity entity-name="PartyClassification" package="mantle.party" cache="true">
         <field name="partyClassificationId" type="id" is-pk="true"/>
         <field name="classificationTypeEnumId" type="id"/>
@@ -274,29 +227,29 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="classificationTypeEnumId"/></relationship>
         <relationship type="one" title="Parent" related="mantle.party.PartyClassification">
             <key-map field-name="parentClassificationId" related="partyClassificationId"/></relationship>
-        <seed-data>
-            <moqui.basic.EnumerationType description="Party Classification Type" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Customer" enumId="PcltCustomer" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="EEOC (Equal Opportunity)" enumId="PcltEeoc" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Minority" enumId="PcltMinority" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Income" enumId="PcltIncome" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Industry" enumId="PcltIndustry" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Revenue" enumId="PcltRevenue" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Number of Employees" enumId="PcltNumberEmployees" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="SIC Code" enumId="PcltSicCode" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="NAICS Code" enumId="PcltNaicsCode" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Ownership" enumId="PcltOwnership" enumTypeId="PartyClassificationType"/>
+        <!--<seed-data>-->
+            <!--<moqui.basic.EnumerationType description="Party Classification Type" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Customer" enumId="PcltCustomer" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="EEOC (Equal Opportunity)" enumId="PcltEeoc" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Minority" enumId="PcltMinority" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Income" enumId="PcltIncome" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Industry" enumId="PcltIndustry" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Revenue" enumId="PcltRevenue" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Number of Employees" enumId="PcltNumberEmployees" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="SIC Code" enumId="PcltSicCode" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="NAICS Code" enumId="PcltNaicsCode" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Ownership" enumId="PcltOwnership" enumTypeId="PartyClassificationType"/>-->
 
-            <!-- commenting these to simplify options; most are redundant with or less specific than remaining types:
-            <moqui.basic.Enumeration description="Trade" enumId="PcltTrade" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Trade - Wholesale" parentEnumId="PcltTrade" enumId="PcltTradeWholesale" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Trade - Retail" parentEnumId="PcltTrade" enumId="PcltTradeRetail" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Organization" enumId="PcltOrganization" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Person" enumId="PcltPerson" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Size" enumId="PcltSize" enumTypeId="PartyClassificationType"/>
-            <moqui.basic.Enumeration description="Value Rating" enumId="PcltValueRating" enumTypeId="PartyClassificationType"/>
-            -->
-        </seed-data>
+            <!--&lt;!&ndash; commenting these to simplify options; most are redundant with or less specific than remaining types:-->
+            <!--<moqui.basic.Enumeration description="Trade" enumId="PcltTrade" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Trade - Wholesale" parentEnumId="PcltTrade" enumId="PcltTradeWholesale" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Trade - Retail" parentEnumId="PcltTrade" enumId="PcltTradeRetail" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Organization" enumId="PcltOrganization" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Person" enumId="PcltPerson" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Size" enumId="PcltSize" enumTypeId="PartyClassificationType"/>-->
+            <!--<moqui.basic.Enumeration description="Value Rating" enumId="PcltValueRating" enumTypeId="PartyClassificationType"/>-->
+            <!--&ndash;&gt;-->
+        <!--</seed-data>-->
     </entity>
     <entity entity-name="PartyClassificationAppl" package="mantle.party">
         <field name="partyId" type="id" is-pk="true"/>
@@ -317,17 +270,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.party.PartyClassification" short-alias="classification"/>
     </entity>
     -->
-
-    <entity entity-name="PartyDimension" package="mantle.party">
-        <field name="partyId" type="id" is-pk="true"/>
-        <field name="uomDimensionTypeId" type="id" is-pk="true"/>
-        <field name="dimensionDate" type="date-time" is-pk="true" default="ec.user.nowTimestamp"/>
-        <field name="value" type="number-decimal"/>
-        <field name="uomId" type="id"/>
-        <relationship type="one" related="mantle.party.Party"/>
-        <relationship type="one" related="moqui.basic.UomDimensionType" short-alias="type"/>
-        <relationship type="one" related="moqui.basic.Uom" short-alias="uom"/>
-    </entity>
 
     <entity entity-name="PartyContent" package="mantle.party">
         <field name="partyContentId" type="id" is-pk="true"/>
@@ -364,14 +306,14 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.Enumeration description="Employment Authorization Document"  enumId="PcntEmplAuthzDocument" enumTypeId="PartyContentType"/>
         </seed-data>
     </entity>
-    <entity entity-name="PartyGeoPoint" package="mantle.party">
-        <field name="partyId" type="id" is-pk="true"/>
-        <field name="geoPointId" type="id" is-pk="true"/>
-        <field name="fromDate" type="date-time" is-pk="true"/>
-        <field name="thruDate" type="date-time"/>
-        <relationship type="one" related="mantle.party.Party"/>
-        <relationship type="one" related="moqui.basic.GeoPoint"/>
-    </entity>
+    <!--<entity entity-name="PartyGeoPoint" package="mantle.party">-->
+        <!--<field name="partyId" type="id" is-pk="true"/>-->
+        <!--<field name="geoPointId" type="id" is-pk="true"/>-->
+        <!--<field name="fromDate" type="date-time" is-pk="true"/>-->
+        <!--<field name="thruDate" type="date-time"/>-->
+        <!--<relationship type="one" related="mantle.party.Party"/>-->
+        <!--<relationship type="one" related="moqui.basic.GeoPoint"/>-->
+    <!--</entity>-->
     <entity entity-name="PartyIdentification" package="mantle.party">
         <!-- FUTURE? support multiple/history of IDs; single sequenced PK; update lookup/etc services -->
         <field name="partyId" type="id" is-pk="true"/>
@@ -386,28 +328,28 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" title="IssuedBy" related="mantle.party.Party">
             <key-map field-name="issuedByPartyId"/></relationship>
         <index name="PARTY_ID_VALUE"><index-field name="idValue"/></index>
-        <seed-data>
-            <moqui.basic.EnumerationType description="Party Identification Type" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Passport Number" enumId="PtidPassport" enumTypeId="PartyIdType" optionValue="*{4,10}"/>
-            <moqui.basic.Enumeration description="Driver License Number" enumId="PtidDriverLicense" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Social Security Number" enumId="PtidSsn" enumTypeId="PartyIdType" optionValue="999-99-9999"/>
-            <moqui.basic.Enumeration description="Federal Agent Indicator Code" enumId="PtidFaic" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Federal EIN" enumId="PtidFein" enumTypeId="PartyIdType" optionValue="99-9999999"/>
-            <moqui.basic.Enumeration description="Federal User ID" enumId="PtidFuid" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Matricula Consular ID" enumId="PtidMcid" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Global Location Number" enumId="PtidGln" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Alien Registration Number" enumId="PtidArn" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Immigrant Admission Number" enumId="PtidIan" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Dun and Bradstreet DUNS" enumId="PtidDuns" enumTypeId="PartyIdType" optionValue="99-999-9999"/>
-            <moqui.basic.Enumeration description="Dun and Bradstreet DUNS+4" enumId="PtidDuns4" enumTypeId="PartyIdType" optionValue="99-999-9999-9999"/>
-            <moqui.basic.Enumeration description="Customer Assigned" enumId="PtidCust" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Vendor Assigned" enumId="PtidVend" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="Permanent Resident" enumId="PtidPermReg" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="I-551" enumId="PtidI551" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="I-766" enumId="PtidI766" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="I-94" enumId="PtidI94" enumTypeId="PartyIdType"/>
-            <moqui.basic.Enumeration description="I-94A" enumId="Ptid94A" enumTypeId="PartyIdType"/>
-        </seed-data>
+        <!--<seed-data>-->
+            <!--<moqui.basic.EnumerationType description="Party Identification Type" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Passport Number" enumId="PtidPassport" enumTypeId="PartyIdType" optionValue="*{4,10}"/>-->
+            <!--<moqui.basic.Enumeration description="Driver License Number" enumId="PtidDriverLicense" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Social Security Number" enumId="PtidSsn" enumTypeId="PartyIdType" optionValue="999-99-9999"/>-->
+            <!--<moqui.basic.Enumeration description="Federal Agent Indicator Code" enumId="PtidFaic" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Federal EIN" enumId="PtidFein" enumTypeId="PartyIdType" optionValue="99-9999999"/>-->
+            <!--<moqui.basic.Enumeration description="Federal User ID" enumId="PtidFuid" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Matricula Consular ID" enumId="PtidMcid" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Global Location Number" enumId="PtidGln" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Alien Registration Number" enumId="PtidArn" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Immigrant Admission Number" enumId="PtidIan" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Dun and Bradstreet DUNS" enumId="PtidDuns" enumTypeId="PartyIdType" optionValue="99-999-9999"/>-->
+            <!--<moqui.basic.Enumeration description="Dun and Bradstreet DUNS+4" enumId="PtidDuns4" enumTypeId="PartyIdType" optionValue="99-999-9999-9999"/>-->
+            <!--<moqui.basic.Enumeration description="Customer Assigned" enumId="PtidCust" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Vendor Assigned" enumId="PtidVend" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="Permanent Resident" enumId="PtidPermReg" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="I-551" enumId="PtidI551" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="I-766" enumId="PtidI766" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="I-94" enumId="PtidI94" enumTypeId="PartyIdType"/>-->
+            <!--<moqui.basic.Enumeration description="I-94A" enumId="Ptid94A" enumTypeId="PartyIdType"/>-->
+        <!--</seed-data>-->
     </entity>
     <entity entity-name="PartyNote" package="mantle.party">
         <field name="partyId" type="id" is-pk="true"/>
@@ -453,19 +395,19 @@ along with this software (see the LICENSE.md file). If not, see
                 other examples see Table 2.5 in "The Data Model Resource Book, Revised Edition, Volume 1"-->
             <moqui.basic.EnumerationType description="Party Relationship Type" enumTypeId="PartyRelationshipType"/>
             <moqui.basic.Enumeration description="Agent" enumId="PrtAgent" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Child" enumId="PrtChild" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Contact" enumId="PrtContact" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Customer" enumId="PrtCustomer" enumTypeId="PartyRelationshipType"/>
+            <!--<moqui.basic.Enumeration description="Child" enumId="PrtChild" enumTypeId="PartyRelationshipType"/>-->
+            <!--<moqui.basic.Enumeration description="Contact" enumId="PrtContact" enumTypeId="PartyRelationshipType"/>-->
+            <!--<moqui.basic.Enumeration description="Customer" enumId="PrtCustomer" enumTypeId="PartyRelationshipType"/>-->
             <moqui.basic.Enumeration description="Employee" enumId="PrtEmployee" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Friend" enumId="PrtFriend" enumTypeId="PartyRelationshipType"/>
+            <!--<moqui.basic.Enumeration description="Friend" enumId="PrtFriend" enumTypeId="PartyRelationshipType"/>-->
             <moqui.basic.Enumeration description="Manager" enumId="PrtManager" enumTypeId="PartyRelationshipType"/>
             <moqui.basic.Enumeration description="Organization Member" enumId="PrtMember" enumTypeId="PartyRelationshipType"/>
             <moqui.basic.Enumeration description="Organization Rollup (Child)" enumId="PrtOrgRollup" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Partner" enumId="PrtPartner" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Representative" enumId="PrtRepresentative" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Sales Affiliate" enumId="PrtSalesAffiliate" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Spouse" enumId="PrtSpouse" enumTypeId="PartyRelationshipType"/>
-            <moqui.basic.Enumeration description="Supplier" enumId="PrtSupplier" enumTypeId="PartyRelationshipType"/>
+            <!--<moqui.basic.Enumeration description="Partner" enumId="PrtPartner" enumTypeId="PartyRelationshipType"/>-->
+            <!--<moqui.basic.Enumeration description="Representative" enumId="PrtRepresentative" enumTypeId="PartyRelationshipType"/>-->
+            <!--<moqui.basic.Enumeration description="Sales Affiliate" enumId="PrtSalesAffiliate" enumTypeId="PartyRelationshipType"/>-->
+            <!--<moqui.basic.Enumeration description="Spouse" enumId="PrtSpouse" enumTypeId="PartyRelationshipType"/>-->
+            <!--<moqui.basic.Enumeration description="Supplier" enumId="PrtSupplier" enumTypeId="PartyRelationshipType"/>-->
 
             <moqui.basic.StatusType description="Party Relationship" statusTypeId="PartyRelationship"/>
         </seed-data>
@@ -477,8 +419,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.party.Party" short-alias="party"/>
         <relationship type="one" related="mantle.party.RoleType" short-alias="role"/>
         <!-- This relationship is necessary as a backward relationship used in a DataDocument, otherwise wouldn't be needed -->
-        <relationship type="many" title="Vendor" related="mantle.order.OrderPart">
-            <key-map field-name="partyId" related="vendorPartyId"/></relationship>
     </entity>
     <entity entity-name="RoleGroupMember" package="mantle.party">
         <field name="roleGroupEnumId" type="id" is-pk="true"/>
@@ -502,230 +442,231 @@ along with this software (see the LICENSE.md file). If not, see
             <mantle.party.RoleType description="Not Applicable" roleTypeId="_NA_"/>
 
             <!-- General Roles -->
-            <mantle.party.RoleType description="Agent" roleTypeId="Agent"/>
-            <mantle.party.RoleType description="Affiliate" roleTypeId="Affiliate"/>
-            <mantle.party.RoleType description="Asset Owner" roleTypeId="AssetOwner"/>
-            <mantle.party.RoleType description="Bad Actor (Banned)" roleTypeId="BadActor"/>
-            <mantle.party.RoleType description="Carrier" roleTypeId="Carrier"/>
-            <mantle.party.RoleType description="Competitor" roleTypeId="Competitor"/>
-            <mantle.party.RoleType description="Consumer" roleTypeId="Consumer"/>
-            <mantle.party.RoleType description="Contractor" roleTypeId="Contractor"/>
-            <mantle.party.RoleType description="Distributor" roleTypeId="Distributor"/>
-            <mantle.party.RoleType description="Garnishment Payee" roleTypeId="GarnishmentPayee"/>
-            <mantle.party.RoleType description="Internet Service Provider" roleTypeId="InternetSp"/>
-            <mantle.party.RoleType description="Hosting Provider" roleTypeId="HostingProvider"/>
-            <mantle.party.RoleType description="Manufacturer" roleTypeId="Manufacturer"/>
-            <mantle.party.RoleType description="Owner"  roleTypeId="Owner"/>
-            <mantle.party.RoleType description="Partner" roleTypeId="Partner"/>
-            <mantle.party.RoleType description="Payroll Other Payee" roleTypeId="PayrollOtherPayee"/>
-            <mantle.party.RoleType description="Prospect" roleTypeId="Prospect"/>
-            <mantle.party.RoleType description="Referrer" roleTypeId="Referrer"/>
-            <mantle.party.RoleType description="Sales Account" roleTypeId="Account"/>
-            <mantle.party.RoleType description="Sales Account Lead" roleTypeId="AccountLead"/>
-            <mantle.party.RoleType description="Shareholder" roleTypeId="Shareholder"/>
-            <mantle.party.RoleType description="Subscriber" roleTypeId="Subscriber"/>
-            <mantle.party.RoleType description="Supplier" roleTypeId="Supplier"/>
-            <mantle.party.RoleType description="Visitor" roleTypeId="Visitor"/>
-            <mantle.party.RoleType description="Web Master" roleTypeId="WebMaster"/>
+            <!--<mantle.party.RoleType description="Agent" roleTypeId="Agent"/>-->
+            <!--<mantle.party.RoleType description="Affiliate" roleTypeId="Affiliate"/>-->
+            <!--<mantle.party.RoleType description="Asset Owner" roleTypeId="AssetOwner"/>-->
+            <!--<mantle.party.RoleType description="Bad Actor (Banned)" roleTypeId="BadActor"/>-->
+            <!--<mantle.party.RoleType description="Carrier" roleTypeId="Carrier"/>-->
+            <!--<mantle.party.RoleType description="Competitor" roleTypeId="Competitor"/>-->
+            <!--<mantle.party.RoleType description="Consumer" roleTypeId="Consumer"/>-->
+            <!--<mantle.party.RoleType description="Contractor" roleTypeId="Contractor"/>-->
+            <!--<mantle.party.RoleType description="Distributor" roleTypeId="Distributor"/>-->
+            <!--<mantle.party.RoleType description="Garnishment Payee" roleTypeId="GarnishmentPayee"/>-->
+            <!--<mantle.party.RoleType description="Internet Service Provider" roleTypeId="InternetSp"/>-->
+            <!--<mantle.party.RoleType description="Hosting Provider" roleTypeId="HostingProvider"/>-->
+            <!--<mantle.party.RoleType description="Manufacturer" roleTypeId="Manufacturer"/>-->
+            <!--<mantle.party.RoleType description="Owner"  roleTypeId="Owner"/>-->
+            <!--<mantle.party.RoleType description="Partner" roleTypeId="Partner"/>-->
+            <!--<mantle.party.RoleType description="Payroll Other Payee" roleTypeId="PayrollOtherPayee"/>-->
+            <!--<mantle.party.RoleType description="Prospect" roleTypeId="Prospect"/>-->
+            <!--<mantle.party.RoleType description="Referrer" roleTypeId="Referrer"/>-->
+            <!--<mantle.party.RoleType description="Sales Account" roleTypeId="Account"/>-->
+            <!--<mantle.party.RoleType description="Sales Account Lead" roleTypeId="AccountLead"/>-->
+            <!--<mantle.party.RoleType description="Shareholder" roleTypeId="Shareholder"/>-->
+            <!--<mantle.party.RoleType description="Subscriber" roleTypeId="Subscriber"/>-->
+            <!--<mantle.party.RoleType description="Supplier" roleTypeId="Supplier"/>-->
+            <!--<mantle.party.RoleType description="Visitor" roleTypeId="Visitor"/>-->
+            <!--<mantle.party.RoleType description="Web Master" roleTypeId="WebMaster"/>-->
 
             <!-- Person Roles -->
-            <mantle.party.RoleType description="Accountant" roleTypeId="Accountant"/>
+            <!--<mantle.party.RoleType description="Accountant" roleTypeId="Accountant"/>-->
             <mantle.party.RoleType description="Administrator" roleTypeId="Administrator"/>
             <mantle.party.RoleType description="Assignee" roleTypeId="Assignee"/>
-            <mantle.party.RoleType description="Buyer" roleTypeId="Buyer"/>
-            <mantle.party.RoleType description="Cashier" roleTypeId="Cashier"/>
-            <mantle.party.RoleType description="Client Billing Rep" roleTypeId="ClientBilling"/>
-            <mantle.party.RoleType description="Client Manager" roleTypeId="ClientManager"/>
-            <mantle.party.RoleType description="Email Administrator" roleTypeId="EmailAdmin"/>
+            <!--<mantle.party.RoleType description="Buyer" roleTypeId="Buyer"/>-->
+            <!--<mantle.party.RoleType description="Cashier" roleTypeId="Cashier"/>-->
+            <!--<mantle.party.RoleType description="Client Billing Rep" roleTypeId="ClientBilling"/>-->
+            <!--<mantle.party.RoleType description="Client Manager" roleTypeId="ClientManager"/>-->
+            <!--<mantle.party.RoleType description="Email Administrator" roleTypeId="EmailAdmin"/>-->
             <mantle.party.RoleType description="Employee" roleTypeId="Employee"/>
-            <mantle.party.RoleType description="Executive" roleTypeId="Executive"/>
-            <mantle.party.RoleType description="Family Member" roleTypeId="FamilyMember"/>
-            <mantle.party.RoleType description="Human Resources Manager" roleTypeId="HumanResourcesManager"/>
-            <mantle.party.RoleType description="Inventory Manager" roleTypeId="InventoryManager"/>
+            <!--<mantle.party.RoleType description="Executive" roleTypeId="Executive"/>-->
+            <!--<mantle.party.RoleType description="Family Member" roleTypeId="FamilyMember"/>-->
+            <!--<mantle.party.RoleType description="Human Resources Manager" roleTypeId="HumanResourcesManager"/>-->
+            <!--<mantle.party.RoleType description="Inventory Manager" roleTypeId="InventoryManager"/>-->
             <mantle.party.RoleType description="Manager" roleTypeId="Manager"/>
-            <mantle.party.RoleType description="Operator" roleTypeId="Operator"/>
-            <mantle.party.RoleType description="Order Clerk" roleTypeId="OrderClerk"/>
-            <mantle.party.RoleType description="Packer" roleTypeId="Packer"/>
-            <mantle.party.RoleType description="Payroll" roleTypeId="Payroll"/>
-            <mantle.party.RoleType description="Picker" roleTypeId="Picker"/>
-            <mantle.party.RoleType description="Production Manager" roleTypeId="ProductionManager"/>
-            <mantle.party.RoleType description="Production Worker" roleTypeId="ProductionWorker"/>
-            <mantle.party.RoleType description="Receiver" roleTypeId="Receiver"/>
-            <mantle.party.RoleType description="Reporter" roleTypeId="Reporter"/>
-            <mantle.party.RoleType description="Sales Contact" roleTypeId="Contact"/>
-            <mantle.party.RoleType description="Sales Representative" roleTypeId="SalesRepresentative"/>
-            <mantle.party.RoleType description="Shipment Clerk" roleTypeId="ShipmentClerk"/>
-            <mantle.party.RoleType description="Sponsor" roleTypeId="Sponsor"/>
-            <mantle.party.RoleType description="Spouse" roleTypeId="Spouse"/>
-            <mantle.party.RoleType description="Stocker" roleTypeId="Stocker"/>
-            <mantle.party.RoleType description="Supplier Agent" roleTypeId="SupplierAgent"/>
-            <mantle.party.RoleType description="Watcher" roleTypeId="Watcher"/>
-            <mantle.party.RoleType description="Worker" roleTypeId="Worker"/>
+            <!--<mantle.party.RoleType description="Operator" roleTypeId="Operator"/>-->
+            <!--<mantle.party.RoleType description="Order Clerk" roleTypeId="OrderClerk"/>-->
+            <!--<mantle.party.RoleType description="Packer" roleTypeId="Packer"/>-->
+            <!--<mantle.party.RoleType description="Payroll" roleTypeId="Payroll"/>-->
+            <!--<mantle.party.RoleType description="Picker" roleTypeId="Picker"/>-->
+            <!--<mantle.party.RoleType description="Production Manager" roleTypeId="ProductionManager"/>-->
+            <!--<mantle.party.RoleType description="Production Worker" roleTypeId="ProductionWorker"/>-->
+            <!--<mantle.party.RoleType description="Receiver" roleTypeId="Receiver"/>-->
+            <!--<mantle.party.RoleType description="Reporter" roleTypeId="Reporter"/>-->
+            <!--<mantle.party.RoleType description="Sales Contact" roleTypeId="Contact"/>-->
+            <!--<mantle.party.RoleType description="Sales Representative" roleTypeId="SalesRepresentative"/>-->
+            <!--<mantle.party.RoleType description="Shipment Clerk" roleTypeId="ShipmentClerk"/>-->
+            <!--<mantle.party.RoleType description="Sponsor" roleTypeId="Sponsor"/>-->
+            <!--<mantle.party.RoleType description="Spouse" roleTypeId="Spouse"/>-->
+            <!--<mantle.party.RoleType description="Stocker" roleTypeId="Stocker"/>-->
+            <!--<mantle.party.RoleType description="Supplier Agent" roleTypeId="SupplierAgent"/>-->
+            <!--<mantle.party.RoleType description="Watcher" roleTypeId="Watcher"/>-->
+            <!--<mantle.party.RoleType description="Worker" roleTypeId="Worker"/>-->
 
-            <mantle.party.RoleType description="Business Analyst" roleTypeId="BusinessAnalyst"/>
-            <mantle.party.RoleType description="Default Assignee" roleTypeId="DefaultAssignee"/>
-            <mantle.party.RoleType description="Expert User" roleTypeId="ExpertUser"/>
-            <mantle.party.RoleType description="Programmer" roleTypeId="Programmer"/>
-            <mantle.party.RoleType description="Programmer Lead" roleTypeId="ProgrammerLead"/>
-            <mantle.party.RoleType description="Project Manager" roleTypeId="ProjectManager"/>
-            <mantle.party.RoleType description="Quality Analyst" roleTypeId="QualityAnalyst"/>
-            <mantle.party.RoleType description="Quality Lead" roleTypeId="QualityLead"/>
+            <!--<mantle.party.RoleType description="Business Analyst" roleTypeId="BusinessAnalyst"/>-->
+            <!--<mantle.party.RoleType description="Default Assignee" roleTypeId="DefaultAssignee"/>-->
+            <!--<mantle.party.RoleType description="Expert User" roleTypeId="ExpertUser"/>-->
+            <!--<mantle.party.RoleType description="Programmer" roleTypeId="Programmer"/>-->
+            <!--<mantle.party.RoleType description="Programmer Lead" roleTypeId="ProgrammerLead"/>-->
+            <!--<mantle.party.RoleType description="Project Manager" roleTypeId="ProjectManager"/>-->
+            <!--<mantle.party.RoleType description="Quality Analyst" roleTypeId="QualityAnalyst"/>-->
+            <!--<mantle.party.RoleType description="Quality Lead" roleTypeId="QualityLead"/>-->
             <mantle.party.RoleType description="System Administrator" roleTypeId="SysAdmin"/>
-            <mantle.party.RoleType description="System Architect" roleTypeId="SysArchitect"/>
-            <mantle.party.RoleType description="UI Designer" roleTypeId="UiDesigner"/>
+            <!--<mantle.party.RoleType description="System Architect" roleTypeId="SysArchitect"/>-->
+            <!--<mantle.party.RoleType description="UI Designer" roleTypeId="UiDesigner"/>-->
 
 
             <moqui.basic.Enumeration description="Person Roles" enumId="RgpPerson" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Accountant"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Accountant"/>-->
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Administrator"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Assignee"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Buyer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Cashier"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ClientBilling"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ClientManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Contact"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="EmailAdmin"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Employee"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="FamilyMember"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="HumanResourcesManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="InventoryManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Manager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Operator"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="OrderClerk"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Packer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Picker"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ProductionManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Receiver"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Reporter"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SalesRepresentative"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ShipmentClerk"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Sponsor"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Spouse"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Stocker"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SupplierAgent"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Watcher"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Worker"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Assignee"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Buyer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Cashier"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ClientBilling"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ClientManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Contact"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="EmailAdmin"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Employee"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="FamilyMember"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="HumanResourcesManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="InventoryManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Manager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Operator"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="OrderClerk"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Packer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Picker"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ProductionManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Receiver"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Reporter"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SalesRepresentative"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ShipmentClerk"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Sponsor"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Spouse"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Stocker"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SupplierAgent"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Watcher"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Worker"/>-->
 
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="BusinessAnalyst"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="DefaultAssignee"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ExpertUser"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Programmer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ProgrammerLead"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ProjectManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="QualityAnalyst"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="QualityLead"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="BusinessAnalyst"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="DefaultAssignee"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ExpertUser"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="Programmer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ProgrammerLead"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="ProjectManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="QualityAnalyst"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="QualityLead"/>-->
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SysAdmin"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SysArchitect"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="UiDesigner"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="SysArchitect"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpPerson" roleTypeId="UiDesigner"/>-->
 
             <!-- Organization Roles -->
             <mantle.party.RoleType description="Association" roleTypeId="OrgAssociation"/>
+            <!-- 后续相对方管理  企业类型参考此值-->
             <mantle.party.RoleType description="Corporation" roleTypeId="OrgCorporation"/>
             <mantle.party.RoleType description="Department" roleTypeId="OrgDepartment"/>
-            <mantle.party.RoleType description="Division" roleTypeId="OrgDivision"/>
+            <!--<mantle.party.RoleType description="Division" roleTypeId="OrgDivision"/>-->
             <mantle.party.RoleType description="Employer" roleTypeId="OrgEmployer"/>
-            <mantle.party.RoleType description="Family" roleTypeId="OrgFamily"/>
-            <mantle.party.RoleType description="Government" roleTypeId="OrgGovernment"/>
+            <!--<mantle.party.RoleType description="Family" roleTypeId="OrgFamily"/>-->
+            <!-- 后续相对方管理  政府机构类型参考此值-->
             <mantle.party.RoleType description="Government Agency" roleTypeId="OrgGovernmentAgency"/>
-            <mantle.party.RoleType description="Household" roleTypeId="OrgHousehold"/>
+            <!--<mantle.party.RoleType description="Government" roleTypeId="OrgGovernment"/>-->
             <mantle.party.RoleType description="Internal Organization" roleTypeId="OrgInternal"/>
             <mantle.party.RoleType description="Team" roleTypeId="OrgTeam"/>
-            <mantle.party.RoleType description="Unit" roleTypeId="OrgUnit"/>
+            <!--<mantle.party.RoleType description="Unit" roleTypeId="OrgUnit"/>-->
+            <!-- 组织机构第一个节点时考虑使用-->
             <mantle.party.RoleType description="Parent" roleTypeId="OrgParent"/>
-            <mantle.party.RoleType description="Regulatory Agency" roleTypeId="OrgRegulatoryAgency"/>
-            <mantle.party.RoleType description="Subsidiary" roleTypeId="OrgSubsidiary"/>
-            <mantle.party.RoleType description="Tax Authority" roleTypeId="OrgTaxAuthority"/>
-            <mantle.party.RoleType description="Union" roleTypeId="OrgUnion"/>
+            <!--<mantle.party.RoleType description="Regulatory Agency" roleTypeId="OrgRegulatoryAgency"/>-->
+            <!--<mantle.party.RoleType description="Subsidiary" roleTypeId="OrgSubsidiary"/>-->
+            <!--<mantle.party.RoleType description="Tax Authority" roleTypeId="OrgTaxAuthority"/>-->
+            <!--<mantle.party.RoleType description="Union" roleTypeId="OrgUnion"/>-->
 
             <moqui.basic.Enumeration description="Organization Roles" enumId="RgpOrganization" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgAssociation"/>
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgCorporation"/>
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgDepartment"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgDivision"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgFamily"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgGovernment"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgDivision"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgFamily"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgGovernment"/>-->
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgGovernmentAgency"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgHousehold"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgHousehold"/>-->
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgInternal"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgTeam"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgUnit"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgTeam"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgUnit"/>-->
             <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgParent"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgRegulatoryAgency"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgSubsidiary"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgTaxAuthority"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgUnion"/>
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgRegulatoryAgency"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgSubsidiary"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgTaxAuthority"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrganization" roleTypeId="OrgUnion"/>-->
 
             <!-- Calendar Roles -->
-            <mantle.party.RoleType description="Attendee" roleTypeId="Attendee"/>
-            <mantle.party.RoleType description="Delegate" roleTypeId="Delegate"/>
-            <mantle.party.RoleType description="Host" roleTypeId="Host"/>
-            <mantle.party.RoleType description="Organizer" roleTypeId="Organizer"/>
+            <!--<mantle.party.RoleType description="Attendee" roleTypeId="Attendee"/>-->
+            <!--<mantle.party.RoleType description="Delegate" roleTypeId="Delegate"/>-->
+            <!--<mantle.party.RoleType description="Host" roleTypeId="Host"/>-->
+            <!--<mantle.party.RoleType description="Organizer" roleTypeId="Organizer"/>-->
 
-            <moqui.basic.Enumeration description="Calendar Roles" enumId="RgpCalendar" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Attendee"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Delegate"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Host"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Organizer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Owner"/>
+            <!--<moqui.basic.Enumeration description="Calendar Roles" enumId="RgpCalendar" enumTypeId="RoleGroup"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Attendee"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Delegate"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Host"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Organizer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpCalendar" roleTypeId="Owner"/>-->
 
             <!-- Customer and Vendor Roles -->
             <!-- NOTE: these don't use RoleGroupMember because they are an actual hierarchy of roles (Customer and Vendor are valid roles with sub-roles) -->
-            <mantle.party.RoleType description="Customer" roleTypeId="Customer"/>
-            <mantle.party.RoleType description="Customer - Bill To" parentTypeId="Customer" roleTypeId="CustomerBillTo"/>
-            <mantle.party.RoleType description="Customer - End User" parentTypeId="Customer" roleTypeId="CustomerEndUser"/>
-            <mantle.party.RoleType description="Customer - Placing" parentTypeId="Customer" roleTypeId="CustomerPlacing"/>
-            <mantle.party.RoleType description="Customer - Ship To" parentTypeId="Customer" roleTypeId="CustomerShipTo"/>
-            <mantle.party.RoleType description="Vendor" roleTypeId="Vendor"/>
-            <mantle.party.RoleType description="Vendor - Bill From" parentTypeId="Vendor" roleTypeId="VendorBillFrom"/>
-            <mantle.party.RoleType description="Vendor - Ship From" parentTypeId="Vendor" roleTypeId="VendorShipFrom"/>
-            <mantle.party.RoleType description="Vendor - Pick Up From" parentTypeId="Vendor" roleTypeId="VendorPickUpFrom"/>
+            <!--<mantle.party.RoleType description="Customer" roleTypeId="Customer"/>-->
+            <!--<mantle.party.RoleType description="Customer - Bill To" parentTypeId="Customer" roleTypeId="CustomerBillTo"/>-->
+            <!--<mantle.party.RoleType description="Customer - End User" parentTypeId="Customer" roleTypeId="CustomerEndUser"/>-->
+            <!--<mantle.party.RoleType description="Customer - Placing" parentTypeId="Customer" roleTypeId="CustomerPlacing"/>-->
+            <!--<mantle.party.RoleType description="Customer - Ship To" parentTypeId="Customer" roleTypeId="CustomerShipTo"/>-->
+            <!--<mantle.party.RoleType description="Vendor" roleTypeId="Vendor"/>-->
+            <!--<mantle.party.RoleType description="Vendor - Bill From" parentTypeId="Vendor" roleTypeId="VendorBillFrom"/>-->
+            <!--<mantle.party.RoleType description="Vendor - Ship From" parentTypeId="Vendor" roleTypeId="VendorShipFrom"/>-->
+            <!--<mantle.party.RoleType description="Vendor - Pick Up From" parentTypeId="Vendor" roleTypeId="VendorPickUpFrom"/>-->
 
-            <moqui.basic.Enumeration description="Order Roles" enumId="RgpOrder" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Customer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerBillTo"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerEndUser"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerPlacing"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerShipTo"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Vendor"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="VendorBillFrom"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="VendorShipFrom"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="VendorPickUpFrom"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Supplier"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Account"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Agent"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Affiliate"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Carrier"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Competitor"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Partner"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Referrer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Buyer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Cashier"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="ClientBilling"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="OrderClerk"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="SalesRepresentative"/>
+            <!--<moqui.basic.Enumeration description="Order Roles" enumId="RgpOrder" enumTypeId="RoleGroup"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Customer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerBillTo"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerEndUser"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerPlacing"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="CustomerShipTo"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Vendor"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="VendorBillFrom"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="VendorShipFrom"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="VendorPickUpFrom"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Supplier"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Account"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Agent"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Affiliate"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Carrier"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Competitor"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Partner"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Referrer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Buyer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="Cashier"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="ClientBilling"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="OrderClerk"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpOrder" roleTypeId="SalesRepresentative"/>-->
 
-            <moqui.basic.Enumeration description="Account Contact Roles" enumId="RgpAccountContact" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Accountant"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Buyer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ClientBilling"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ClientManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="InventoryManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Manager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="OrderClerk"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Receiver"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ProductionManager"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="SalesRepresentative"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ShipmentClerk"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="SupplierAgent"/>
+            <!--<moqui.basic.Enumeration description="Account Contact Roles" enumId="RgpAccountContact" enumTypeId="RoleGroup"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Accountant"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Buyer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ClientBilling"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ClientManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="InventoryManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Manager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="OrderClerk"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="Receiver"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ProductionManager"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="SalesRepresentative"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="ShipmentClerk"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAccountContact" roleTypeId="SupplierAgent"/>-->
 
-            <moqui.basic.Enumeration description="Directly Applied Roles" enumId="RgpDirect" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Customer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Account"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Contact"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Supplier"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="OrgInternal"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Employee"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="BadActor"/>
+            <!--<moqui.basic.Enumeration description="Directly Applied Roles" enumId="RgpDirect" enumTypeId="RoleGroup"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Customer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Account"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Contact"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Supplier"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="OrgInternal"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="Employee"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpDirect" roleTypeId="BadActor"/>-->
         </seed-data>
     </entity>
 
@@ -760,59 +701,59 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="partySettingTypeId"/></relationship>
         <seed-data>
             <!-- Signature Required - here instead of in ShipmentEntities.xml for FK dependency -->
-            <moqui.basic.EnumerationType description="Signature Required" enumTypeId="SignatureRequired"/>
-            <moqui.basic.Enumeration enumCode="" description="None" enumId="PsrNone" sequenceNum="1" enumTypeId="SignatureRequired"/>
-            <moqui.basic.Enumeration enumCode="STANDARD" description="Standard" enumId="PsrStandard" sequenceNum="2" enumTypeId="SignatureRequired"/>
-            <moqui.basic.Enumeration enumCode="ADULT" description="Adult" enumId="PsrAdult" sequenceNum="3" enumTypeId="SignatureRequired"/>
-            <moqui.basic.Enumeration enumCode="CERTIFIED" description="Certified (USPS)" enumId="PsrCertified" sequenceNum="4" enumTypeId="SignatureRequired"/>
-            <moqui.basic.Enumeration enumCode="INDIRECT" description="Indirect (FedEx)" enumId="PsrIndirect" sequenceNum="5" enumTypeId="SignatureRequired"/>
+            <!--<moqui.basic.EnumerationType description="Signature Required" enumTypeId="SignatureRequired"/>-->
+            <!--<moqui.basic.Enumeration enumCode="" description="None" enumId="PsrNone" sequenceNum="1" enumTypeId="SignatureRequired"/>-->
+            <!--<moqui.basic.Enumeration enumCode="STANDARD" description="Standard" enumId="PsrStandard" sequenceNum="2" enumTypeId="SignatureRequired"/>-->
+            <!--<moqui.basic.Enumeration enumCode="ADULT" description="Adult" enumId="PsrAdult" sequenceNum="3" enumTypeId="SignatureRequired"/>-->
+            <!--<moqui.basic.Enumeration enumCode="CERTIFIED" description="Certified (USPS)" enumId="PsrCertified" sequenceNum="4" enumTypeId="SignatureRequired"/>-->
+            <!--<moqui.basic.Enumeration enumCode="INDIRECT" description="Indirect (FedEx)" enumId="PsrIndirect" sequenceNum="5" enumTypeId="SignatureRequired"/>-->
 
-            <!-- Customer Settings -->
-            <mantle.party.PartySettingType partySettingTypeId="CustomerSingleLot" description="Single Lot per Order"
-                    enumTypeId="BooleanYN" defaultValue="BlN"><roles roleTypeId="Customer"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="CustomerNewerInventory" description="Newer Inventory each Order"
-                    enumTypeId="BooleanYN" defaultValue="BlN"><roles roleTypeId="Customer"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="CustomerRequireSign" description="Require Signature"
-                    enumTypeId="SignatureRequired" defaultValue="PsrNone"><roles roleTypeId="Customer"/></mantle.party.PartySettingType>
+            <!--&lt;!&ndash; Customer Settings &ndash;&gt;-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="CustomerSingleLot" description="Single Lot per Order"-->
+                    <!--enumTypeId="BooleanYN" defaultValue="BlN"><roles roleTypeId="Customer"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="CustomerNewerInventory" description="Newer Inventory each Order"-->
+                    <!--enumTypeId="BooleanYN" defaultValue="BlN"><roles roleTypeId="Customer"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="CustomerRequireSign" description="Require Signature"-->
+                    <!--enumTypeId="SignatureRequired" defaultValue="PsrNone"><roles roleTypeId="Customer"/></mantle.party.PartySettingType>-->
 
-            <mantle.party.PartySettingType partySettingTypeId="OrgInvoiceProductStoreId" description="Default Invoice Product Store ID">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgInvoiceProductStoreId" description="Default Invoice Product Store ID">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
 
             <!-- Address validate and default shipment gateways -->
-            <mantle.party.PartySettingType partySettingTypeId="ValidateAddressGatewayConfigId" description="Validate Address Gateway Config ID">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="DefaultShipmentGatewayConfigId" description="Default Shipment Gateway Config ID">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
+            <!--<mantle.party.PartySettingType partySettingTypeId="ValidateAddressGatewayConfigId" description="Validate Address Gateway Config ID">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="DefaultShipmentGatewayConfigId" description="Default Shipment Gateway Config ID">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
             <!-- PaymentMethod vault gateway - setting type per org for payment gateway config to use by default for CC vault -->
             <!-- Support required for each payment gateway integration, org partyId is: PaymentMethod.ownerPartyId => Payment.ownerPartyId -->
-            <mantle.party.PartySettingType partySettingTypeId="VaultPaymentGatewayConfigId" description="Vault Payment Gateway Config ID">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
+            <!--<mantle.party.PartySettingType partySettingTypeId="VaultPaymentGatewayConfigId" description="Vault Payment Gateway Config ID">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
 
             <!-- Print/PDF Template Location Settings -->
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentInsert" description="Template Location Shipment Insert">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentPick" description="Template Location Shipment Pick Sheet">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentPack" description="Template Location Shipment Pack Sheet">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentByPackage" description="Template Location Shipment By Package">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentInsert" description="Template Location Shipment Insert">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentPick" description="Template Location Shipment Pick Sheet">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentPack" description="Template Location Shipment Pack Sheet">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentByPackage" description="Template Location Shipment By Package">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
 
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateInvoicePrint" description="Template Location Invoice Print">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateOrderPrint" description="Template Location Order Print">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateInvoicePrint" description="Template Location Invoice Print">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateOrderPrint" description="Template Location Order Print">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
 
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplatePaymentCheck" description="Template Location Payment Check">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplatePaymentDetail" description="Template Location Payment Detail">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <!-- TODO: support template location setting  -->
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateReceivableStatement" description="Template Location Receivable Statement">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-            <!-- TODO: support template location setting  -->
-            <mantle.party.PartySettingType partySettingTypeId="OrgTemplateFinancialAccountStatement" description="Template Location Financial Account Statement">
-                <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplatePaymentCheck" description="Template Location Payment Check">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplatePaymentDetail" description="Template Location Payment Detail">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--&lt;!&ndash; TODO: support template location setting  &ndash;&gt;-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateReceivableStatement" description="Template Location Receivable Statement">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
+            <!--&lt;!&ndash; TODO: support template location setting  &ndash;&gt;-->
+            <!--<mantle.party.PartySettingType partySettingTypeId="OrgTemplateFinancialAccountStatement" description="Template Location Financial Account Statement">-->
+                <!--<roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>-->
         </seed-data>
     </entity>
     <entity entity-name="PartySettingTypeRole" package="mantle.party" use="configuration">
@@ -889,11 +830,11 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.StatusType description="Agreement" statusTypeId="Agreement"/>
 
             <!-- Agreement Roles -->
-            <moqui.basic.Enumeration description="Agreement Roles" enumId="RgpAgreement" enumTypeId="RoleGroup"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Carrier"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Customer"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Employee"/>
-            <mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Supplier"/>
+            <!--<moqui.basic.Enumeration description="Agreement Roles" enumId="RgpAgreement" enumTypeId="RoleGroup"/>-->
+            <!--&lt;!&ndash;<mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Carrier"/>&ndash;&gt;-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Customer"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Employee"/>-->
+            <!--<mantle.party.RoleGroupMember roleGroupEnumId="RgpAgreement" roleTypeId="Supplier"/>-->
         </seed-data>
     </entity>
     <entity entity-name="AgreementAddendum" package="mantle.party.agreement">
@@ -966,10 +907,6 @@ along with this software (see the LICENSE.md file). If not, see
         <!-- Really need these? redundant with fields on Agreement: <field name="fromDate" type="date-time"/><field name="thruDate" type="date-time"/> -->
         <field name="termText" type="text-long"/>
         <field name="termNumber" type="number-decimal"/>
-        <relationship type="one" related="mantle.party.agreement.Agreement"/>
-        <relationship type="one-nofk" related="mantle.party.agreement.AgreementItem">
-            <key-map field-name="agreementId"/><key-map field-name="agreementItemSeqId"/></relationship>
-        <relationship type="one" related="mantle.account.invoice.SettlementTerm"/>
         <relationship type="one" title="TermType" related="moqui.basic.Enumeration">
             <key-map field-name="termTypeEnumId"/></relationship>
         <!-- see the mantle.account.invoice.SettlementTerm entity for TermType enums -->
@@ -989,7 +926,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.party.agreement.Agreement"/>
         <relationship type="one" title="AgreementItemType" related="moqui.basic.Enumeration">
             <key-map field-name="agreementItemTypeEnumId"/></relationship>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" title="Quantity" related="moqui.basic.Uom" short-alias="quantityUom">
             <key-map field-name="quantityUomId"/></relationship>
         <relationship type="many" related="mantle.party.agreement.AgreementTerm" short-alias="terms">
@@ -1108,7 +1044,6 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="toPartyId" related="partyId"/></relationship>
         <relationship type="one" title="To" related="mantle.party.RoleType" short-alias="toRole">
             <key-map field-name="toRoleTypeId"/></relationship>
-        <relationship type="one" related="ContactList" short-alias="contactList"/>
         <relationship type="one" title="CommunicationEventReason" related="moqui.basic.Enumeration" short-alias="reason">
             <key-map field-name="reasonEnumId"/></relationship>
 
@@ -1119,8 +1054,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="many" related="mantle.party.communication.CommunicationEventProduct" short-alias="products">
             <key-map field-name="communicationEventId"/></relationship>
         <relationship type="many" related="mantle.party.communication.CommunicationEventPurpose" short-alias="purposes">
-            <key-map field-name="communicationEventId"/></relationship>
-        <relationship type="many" related="mantle.order.OrderCommunicationEvent" short-alias="orders">
             <key-map field-name="communicationEventId"/></relationship>
 
         <index name="COMMEVT_TP_ST_CET" unique="false"><index-field name="toPartyId"/><index-field name="statusId"/>
@@ -1250,7 +1183,6 @@ along with this software (see the LICENSE.md file). If not, see
     <entity entity-name="CommunicationEventProduct" package="mantle.party.communication" cache="never">
         <field name="productId" type="id" is-pk="true"/>
         <field name="communicationEventId" type="id" is-pk="true"/>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" related="mantle.party.communication.CommunicationEvent" short-alias="communicationEvent"/>
     </entity>
     <entity entity-name="CommunicationEventPurpose" package="mantle.party.communication">
@@ -1320,7 +1252,7 @@ along with this software (see the LICENSE.md file). If not, see
     </entity>
 
     <!-- ========================================================= -->
-    <!-- mantle.party.contact -->
+    <!-- mantle.party.contact  后续考虑是否删除 -->
     <!-- ========================================================= -->
 
     <entity entity-name="ContactMech" package="mantle.party.contact" short-alias="contactMechs" use="nontransactional" cache="never">
@@ -1339,12 +1271,11 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="moqui.basic.DataSource"/>
         <relationship type="one" title="ContactPaymentTrustLevel" related="moqui.basic.Enumeration" short-alias="trustLevel">
             <key-map field-name="trustLevelEnumId"/></relationship>
-        <relationship type="one" related="mantle.account.payment.PaymentFraudEvidence" short-alias="fraudEvidence" mutable="true"/>
 
         <relationship type="one-nofk" title="Replaces" related="mantle.party.contact.ContactMech" short-alias="replacesContactMech">
             <key-map field-name="replacesContactMechId"/></relationship>
         <relationship type="one-nofk" related="mantle.party.contact.TelecomNumber" short-alias="telecomNumber" mutable="true"/>
-        <relationship type="one-nofk" related="mantle.party.contact.PostalAddress" short-alias="postalAddress" mutable="true"/>
+        <!--<relationship type="one-nofk" related="mantle.party.contact.PostalAddress" short-alias="postalAddress" mutable="true"/>-->
         <relationship type="many" related="mantle.party.contact.PartyContactMech" short-alias="parties">
             <key-map field-name="contactMechId"/></relationship>
 
@@ -1567,85 +1498,85 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- mantle.party.time -->
     <!-- ========================================================= -->
 
-    <entity entity-name="TimePeriod" package="mantle.party.time" use="transactional" cache="never">
-        <description>For configurable time periods used in accounting, sales quotas, etc.</description>
-        <field name="timePeriodId" type="id" is-pk="true"/>
-        <field name="parentPeriodId" type="id"/>
-        <field name="previousPeriodId" type="id"/>
-        <field name="timePeriodTypeId" type="id" not-null="true"/>
-        <field name="partyId" type="id" not-null="true"><description>The Party that owns the TimePeriod, generally an Internal Organization.</description></field>
-        <field name="periodNum" type="number-integer"/>
-        <field name="periodName" type="text-medium"/>
-        <field name="fromDate" type="date" not-null="true"><description>The first day of the period.</description></field>
-        <field name="thruDate" type="date" not-null="true"><description>The last day of the period.</description></field>
-        <field name="isClosed" type="text-indicator" default="'N'" enable-audit-log="update"/>
-        <relationship type="one" title="Parent" related="mantle.party.time.TimePeriod" short-alias="parent">
-            <key-map field-name="parentPeriodId" related="timePeriodId"/></relationship>
-        <relationship type="one" title="Previous" related="mantle.party.time.TimePeriod" short-alias="previous">
-            <key-map field-name="previousPeriodId" related="timePeriodId"/></relationship>
-        <relationship type="one" related="mantle.party.time.TimePeriodType" short-alias="type"/>
-        <index name="TIMEPER_TP_PTY_FR" unique="true"><index-field name="timePeriodTypeId"/><index-field name="partyId"/>
-            <index-field name="fromDate"/></index>
-    </entity>
-    <entity entity-name="TimePeriodType" package="mantle.party.time" use="configuration" cache="true">
-        <field name="timePeriodTypeId" type="id" is-pk="true"/>
-        <field name="periodPurposeEnumId" type="id"/>
-        <field name="parentPeriodTypeId" type="id"/>
-        <field name="description" type="text-medium"/>
-        <field name="periodLength" type="number-decimal"/>
-        <field name="lengthUomId" type="id"/>
-        <relationship type="one" title="TimePeriodPurpose" related="moqui.basic.Enumeration" short-alias="purpose">
-            <key-map field-name="periodPurposeEnumId"/></relationship>
-        <relationship type="one" title="Parent" related="mantle.party.time.TimePeriodType" short-alias="parentPeriodType">
-            <key-map field-name="parentPeriodTypeId"/></relationship>
-        <relationship type="one" title="Length" related="moqui.basic.Uom" short-alias="lengthUom">
-            <key-map field-name="lengthUomId" related="uomId"/></relationship>
-        <seed-data>
-            <moqui.basic.EnumerationType description="Time Period Purpose" enumTypeId="TimePeriodPurpose"/>
-            <moqui.basic.Enumeration enumId="Fiscal" description="Fiscal" enumTypeId="TimePeriodPurpose"/>
-            <moqui.basic.Enumeration enumId="Payroll" description="Payroll" enumTypeId="TimePeriodPurpose"/>
-            <moqui.basic.Enumeration enumId="Sales" description="Sales" enumTypeId="TimePeriodPurpose"/>
-            <moqui.basic.Enumeration enumId="Tax" description="Tax" enumTypeId="TimePeriodPurpose"/>
+    <!--<entity entity-name="TimePeriod" package="mantle.party.time" use="transactional" cache="never">-->
+        <!--<description>For configurable time periods used in accounting, sales quotas, etc.</description>-->
+        <!--<field name="timePeriodId" type="id" is-pk="true"/>-->
+        <!--<field name="parentPeriodId" type="id"/>-->
+        <!--<field name="previousPeriodId" type="id"/>-->
+        <!--<field name="timePeriodTypeId" type="id" not-null="true"/>-->
+        <!--<field name="partyId" type="id" not-null="true"><description>The Party that owns the TimePeriod, generally an Internal Organization.</description></field>-->
+        <!--<field name="periodNum" type="number-integer"/>-->
+        <!--<field name="periodName" type="text-medium"/>-->
+        <!--<field name="fromDate" type="date" not-null="true"><description>The first day of the period.</description></field>-->
+        <!--<field name="thruDate" type="date" not-null="true"><description>The last day of the period.</description></field>-->
+        <!--<field name="isClosed" type="text-indicator" default="'N'" enable-audit-log="update"/>-->
+        <!--<relationship type="one" title="Parent" related="mantle.party.time.TimePeriod" short-alias="parent">-->
+            <!--<key-map field-name="parentPeriodId" related="timePeriodId"/></relationship>-->
+        <!--<relationship type="one" title="Previous" related="mantle.party.time.TimePeriod" short-alias="previous">-->
+            <!--<key-map field-name="previousPeriodId" related="timePeriodId"/></relationship>-->
+        <!--<relationship type="one" related="mantle.party.time.TimePeriodType" short-alias="type"/>-->
+        <!--<index name="TIMEPER_TP_PTY_FR" unique="true"><index-field name="timePeriodTypeId"/><index-field name="partyId"/>-->
+            <!--<index-field name="fromDate"/></index>-->
+    <!--</entity>-->
+    <!--<entity entity-name="TimePeriodType" package="mantle.party.time" use="configuration" cache="true">-->
+        <!--<field name="timePeriodTypeId" type="id" is-pk="true"/>-->
+        <!--<field name="periodPurposeEnumId" type="id"/>-->
+        <!--<field name="parentPeriodTypeId" type="id"/>-->
+        <!--<field name="description" type="text-medium"/>-->
+        <!--<field name="periodLength" type="number-decimal"/>-->
+        <!--<field name="lengthUomId" type="id"/>-->
+        <!--<relationship type="one" title="TimePeriodPurpose" related="moqui.basic.Enumeration" short-alias="purpose">-->
+            <!--<key-map field-name="periodPurposeEnumId"/></relationship>-->
+        <!--<relationship type="one" title="Parent" related="mantle.party.time.TimePeriodType" short-alias="parentPeriodType">-->
+            <!--<key-map field-name="parentPeriodTypeId"/></relationship>-->
+        <!--<relationship type="one" title="Length" related="moqui.basic.Uom" short-alias="lengthUom">-->
+            <!--<key-map field-name="lengthUomId" related="uomId"/></relationship>-->
+        <!--<seed-data>-->
+            <!--<moqui.basic.EnumerationType description="Time Period Purpose" enumTypeId="TimePeriodPurpose"/>-->
+            <!--<moqui.basic.Enumeration enumId="Fiscal" description="Fiscal" enumTypeId="TimePeriodPurpose"/>-->
+            <!--<moqui.basic.Enumeration enumId="Payroll" description="Payroll" enumTypeId="TimePeriodPurpose"/>-->
+            <!--<moqui.basic.Enumeration enumId="Sales" description="Sales" enumTypeId="TimePeriodPurpose"/>-->
+            <!--<moqui.basic.Enumeration enumId="Tax" description="Tax" enumTypeId="TimePeriodPurpose"/>-->
 
-            <mantle.party.time.TimePeriodType description="Fiscal Year" timePeriodTypeId="FiscalYear"
-                    periodPurposeEnumId="Fiscal" periodLength="1" lengthUomId="TF_yr"/>
-            <mantle.party.time.TimePeriodType description="Fiscal Quarter" timePeriodTypeId="FiscalQuarter"
-                    parentPeriodTypeId="FiscalYear" periodPurposeEnumId="Fiscal" periodLength="3" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Fiscal Month" timePeriodTypeId="FiscalMonth"
-                    parentPeriodTypeId="FiscalQuarter" periodPurposeEnumId="Fiscal" periodLength="1" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Fiscal Bi-Week" timePeriodTypeId="FiscalBiWeek"
-                    parentPeriodTypeId="FiscalMonth" periodPurposeEnumId="Fiscal" periodLength="2" lengthUomId="TF_wk"/>
-            <mantle.party.time.TimePeriodType description="Fiscal Week" timePeriodTypeId="FiscalWeek"
-                    parentPeriodTypeId="FiscalMonth" periodPurposeEnumId="Fiscal" periodLength="1" lengthUomId="TF_wk"/>
+            <!--<mantle.party.time.TimePeriodType description="Fiscal Year" timePeriodTypeId="FiscalYear"-->
+                    <!--periodPurposeEnumId="Fiscal" periodLength="1" lengthUomId="TF_yr"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Fiscal Quarter" timePeriodTypeId="FiscalQuarter"-->
+                    <!--parentPeriodTypeId="FiscalYear" periodPurposeEnumId="Fiscal" periodLength="3" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Fiscal Month" timePeriodTypeId="FiscalMonth"-->
+                    <!--parentPeriodTypeId="FiscalQuarter" periodPurposeEnumId="Fiscal" periodLength="1" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Fiscal Bi-Week" timePeriodTypeId="FiscalBiWeek"-->
+                    <!--parentPeriodTypeId="FiscalMonth" periodPurposeEnumId="Fiscal" periodLength="2" lengthUomId="TF_wk"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Fiscal Week" timePeriodTypeId="FiscalWeek"-->
+                    <!--parentPeriodTypeId="FiscalMonth" periodPurposeEnumId="Fiscal" periodLength="1" lengthUomId="TF_wk"/>-->
 
-            <mantle.party.time.TimePeriodType description="Payroll Year" timePeriodTypeId="PayrollYear"
-                    periodPurposeEnumId="Payroll" periodLength="1" lengthUomId="TF_yr"/>
-            <mantle.party.time.TimePeriodType description="Payroll Semi-Year" timePeriodTypeId="PayrollSemiYear"
-                    parentPeriodTypeId="PayrollYear" periodPurposeEnumId="Payroll" periodLength="6" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Payroll Quarter" timePeriodTypeId="PayrollQuarter"
-                    parentPeriodTypeId="PayrollYear" periodPurposeEnumId="Payroll" periodLength="3" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Payroll Month" timePeriodTypeId="PayrollMonth"
-                    parentPeriodTypeId="PayrollQuarter" periodPurposeEnumId="Payroll" periodLength="1" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Payroll Semi-Month" timePeriodTypeId="PayrollSemiMonth"
-                    parentPeriodTypeId="PayrollMonth" periodPurposeEnumId="Payroll" periodLength="0.5" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Payroll Bi-Week" timePeriodTypeId="PayrollBiWeek"
-                    parentPeriodTypeId="PayrollMonth" periodPurposeEnumId="Payroll" periodLength="2" lengthUomId="TF_wk"/>
-            <mantle.party.time.TimePeriodType description="Payroll Week" timePeriodTypeId="PayrollWeek"
-                    parentPeriodTypeId="PayrollMonth" periodPurposeEnumId="Payroll" periodLength="1" lengthUomId="TF_wk"/>
+            <!--<mantle.party.time.TimePeriodType description="Payroll Year" timePeriodTypeId="PayrollYear"-->
+                    <!--periodPurposeEnumId="Payroll" periodLength="1" lengthUomId="TF_yr"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Payroll Semi-Year" timePeriodTypeId="PayrollSemiYear"-->
+                    <!--parentPeriodTypeId="PayrollYear" periodPurposeEnumId="Payroll" periodLength="6" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Payroll Quarter" timePeriodTypeId="PayrollQuarter"-->
+                    <!--parentPeriodTypeId="PayrollYear" periodPurposeEnumId="Payroll" periodLength="3" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Payroll Month" timePeriodTypeId="PayrollMonth"-->
+                    <!--parentPeriodTypeId="PayrollQuarter" periodPurposeEnumId="Payroll" periodLength="1" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Payroll Semi-Month" timePeriodTypeId="PayrollSemiMonth"-->
+                    <!--parentPeriodTypeId="PayrollMonth" periodPurposeEnumId="Payroll" periodLength="0.5" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Payroll Bi-Week" timePeriodTypeId="PayrollBiWeek"-->
+                    <!--parentPeriodTypeId="PayrollMonth" periodPurposeEnumId="Payroll" periodLength="2" lengthUomId="TF_wk"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Payroll Week" timePeriodTypeId="PayrollWeek"-->
+                    <!--parentPeriodTypeId="PayrollMonth" periodPurposeEnumId="Payroll" periodLength="1" lengthUomId="TF_wk"/>-->
 
-            <mantle.party.time.TimePeriodType description="Sales Year" timePeriodTypeId="SalesYear"
-                    periodPurposeEnumId="Sales" periodLength="1" lengthUomId="TF_yr"/>
-            <mantle.party.time.TimePeriodType description="Sales Quarter" timePeriodTypeId="SalesQuarter"
-                    parentPeriodTypeId="SalesYear" periodPurposeEnumId="Sales" periodLength="3" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Sales Month" timePeriodTypeId="SalesMonth"
-                    parentPeriodTypeId="SalesQuarter" periodPurposeEnumId="Sales" periodLength="1" lengthUomId="TF_mon"/>
+            <!--<mantle.party.time.TimePeriodType description="Sales Year" timePeriodTypeId="SalesYear"-->
+                    <!--periodPurposeEnumId="Sales" periodLength="1" lengthUomId="TF_yr"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Sales Quarter" timePeriodTypeId="SalesQuarter"-->
+                    <!--parentPeriodTypeId="SalesYear" periodPurposeEnumId="Sales" periodLength="3" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Sales Month" timePeriodTypeId="SalesMonth"-->
+                    <!--parentPeriodTypeId="SalesQuarter" periodPurposeEnumId="Sales" periodLength="1" lengthUomId="TF_mon"/>-->
 
-            <mantle.party.time.TimePeriodType description="Tax Year" timePeriodTypeId="TaxYear"
-                    periodPurposeEnumId="Tax" periodLength="1" lengthUomId="TF_yr"/>
-            <mantle.party.time.TimePeriodType description="Tax Quarter" timePeriodTypeId="TaxQuarter"
-                    parentPeriodTypeId="TaxYear" periodPurposeEnumId="Tax" periodLength="3" lengthUomId="TF_mon"/>
-            <mantle.party.time.TimePeriodType description="Tax Month" timePeriodTypeId="TaxMonth"
-                    parentPeriodTypeId="TaxQuarter" periodPurposeEnumId="Tax" periodLength="1" lengthUomId="TF_mon"/>
-        </seed-data>
-    </entity>
+            <!--<mantle.party.time.TimePeriodType description="Tax Year" timePeriodTypeId="TaxYear"-->
+                    <!--periodPurposeEnumId="Tax" periodLength="1" lengthUomId="TF_yr"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Tax Quarter" timePeriodTypeId="TaxQuarter"-->
+                    <!--parentPeriodTypeId="TaxYear" periodPurposeEnumId="Tax" periodLength="3" lengthUomId="TF_mon"/>-->
+            <!--<mantle.party.time.TimePeriodType description="Tax Month" timePeriodTypeId="TaxMonth"-->
+                    <!--parentPeriodTypeId="TaxQuarter" periodPurposeEnumId="Tax" periodLength="1" lengthUomId="TF_mon"/>-->
+        <!--</seed-data>-->
+    <!--</entity>-->
 </entities>
